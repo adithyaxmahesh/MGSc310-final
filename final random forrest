@@ -1,0 +1,20 @@
+library(randomForest)
+bag_mod <- randomForest(Goals ~ .,
+                        football_selected,
+                        ntree=50,
+                        mtry=5,
+                        importance=TRUE)
+print(bag_mod)
+plot(bag_mod)
+
+importance(bag_mod)
+varImpPlot(bag_mod)
+
+#install.packages("randomForestExplainer")
+library(randomForestExplainer)
+library(ggplot2)
+
+# plot min depth distribution
+plot_min_depth_distribution(bag_mod)
+# plot variable two-way importance measure
+plot_multi_way_importance(bag_mod)
